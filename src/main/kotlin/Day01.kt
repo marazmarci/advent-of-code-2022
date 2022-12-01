@@ -16,7 +16,14 @@ fun main() {
         elfInventory.sum()
     }
 
+    // region Part 1
     val maxElfInventoryCalorieSum = elfInventoryCalorieSums.maxOrNull()!!
-
     println(maxElfInventoryCalorieSum)
+    // endregion Part 1
+
+    // region Part 2
+    val top3InventoryCalorieSums = elfInventoryCalorieSums.sortedDescending().take(3).toList()
+    val top3InventoryCalorieSumsTotal = top3InventoryCalorieSums.sum()
+    println(top3InventoryCalorieSumsTotal)
+    // endregion Part 2
 }
