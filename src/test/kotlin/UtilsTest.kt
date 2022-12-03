@@ -8,42 +8,42 @@ class UtilsTest {
 
         assertSequencesEqual(
             sequenceOf(listOf(), listOf("asd"), listOf("lol1", "lol2"), listOf()),
-            listOf(";", "asd", ";", "lol1", "lol2", ";").split { it == ";" }
+            sequenceOf(";", "asd", ";", "lol1", "lol2", ";").split { it == ";" }
         )
 
         assertSequencesEqual(
             sequenceOf(listOf(), listOf("asd"), listOf("lol1", "lol2")),
-            listOf(";", "asd", ";", "lol1", "lol2").split { it == ";" }
+            sequenceOf(";", "asd", ";", "lol1", "lol2").split { it == ";" }
         )
 
         assertSequencesEqual(
             sequenceOf(listOf("asd"), listOf("lol1", "lol2")),
-            listOf("asd", ";", "lol1", "lol2").split { it == ";" }
+            sequenceOf("asd", ";", "lol1", "lol2").split { it == ";" }
         )
 
         assertSequencesEqual(
             sequenceOf(listOf(), listOf("asd", "lol1", "lol2")),
-            listOf(";", "asd", "lol1", "lol2").split { it == ";" }
+            sequenceOf(";", "asd", "lol1", "lol2").split { it == ";" }
         )
 
         assertSequencesEqual(
             sequenceOf(listOf("asd", "lol1", "lol2")),
-            listOf("asd", "lol1", "lol2").split { it == ";" }
+            sequenceOf("asd", "lol1", "lol2").split { it == ";" }
         )
 
         assertSequencesEqual(
             sequenceOf(listOf("asd")),
-            listOf("asd").split { it == ";" }
+            sequenceOf("asd").split { it == ";" }
         )
 
         assertSequencesEqual(
             sequenceOf(listOf(), listOf()),
-            listOf(";").split { it == ";" }
+            sequenceOf(";").split { it == ";" }
         )
 
         assertSequencesEqual(
             sequenceOf(listOf()),
-            listOf<String>().split { it == ";" }
+            sequenceOf<String>().split { it == ";" }
         )
 
     }
