@@ -6,9 +6,9 @@ fun readInputFile(day: Int): String {
     return resourceUri.readText()
 }
 
-fun readInputFileLines(day: Int) = readInputFile(day).lines()
+fun readInputFileLines(day: Int) = readInputFile(day).lineSequence()
 
-fun <T> List<T>.split(predicate: (T) -> Boolean): Sequence<List<T>> = sequence {
+fun <T> Sequence<T>.split(predicate: (T) -> Boolean): Sequence<List<T>> = sequence {
     var list = mutableListOf<T>()
     forEach {
         if (!predicate(it)) {
