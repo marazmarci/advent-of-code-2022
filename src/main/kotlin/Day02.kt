@@ -29,6 +29,7 @@ fun main() {
         outcome to myChoice
     }.calculateScore()
     println(part1Score)
+    check(part1Score == 8933)
     // endregion Part 1
 
     // region Part 2
@@ -43,6 +44,7 @@ fun main() {
         desiredOutcome to myChoice
     }.calculateScore()
     println(part2Score)
+    check(part2Score == 11998)
     // endregion Part 2
 
 

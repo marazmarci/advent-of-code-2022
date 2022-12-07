@@ -16,6 +16,7 @@ fun main() {
         it.priority
     }.sum()
     println(sumOfPriorities1)
+    check(sumOfPriorities1 == 8176)
     // endregion Part 1
 
     // region Part 2
@@ -28,6 +29,7 @@ fun main() {
             it.priority
         }.sum()
     println(sumOfPriorities2)
+    check(sumOfPriorities2 == 2689)
     // endregion Part 2
 
 }
