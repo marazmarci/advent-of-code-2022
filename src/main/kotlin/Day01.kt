@@ -19,11 +19,13 @@ fun main() {
     // region Part 1
     val maxElfInventoryCalorieSum = elfInventoryCalorieSums.maxOrNull()!!
     println(maxElfInventoryCalorieSum)
+    check(maxElfInventoryCalorieSum == 66186)
     // endregion Part 1
 
     // region Part 2
     val top3InventoryCalorieSums = elfInventoryCalorieSums.sortedDescending().take(3).toList()
     val top3InventoryCalorieSumsTotal = top3InventoryCalorieSums.sum()
     println(top3InventoryCalorieSumsTotal)
+    check(top3InventoryCalorieSumsTotal == 196804)
     // endregion Part 2
 }
