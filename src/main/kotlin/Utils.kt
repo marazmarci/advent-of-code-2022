@@ -8,6 +8,11 @@ fun readInputFile(day: Int): String {
 
 fun readInputFileLines(day: Int) = readInputFile(day).lineSequence()
 
+fun <T> solution(part: Int, computed: T, correct: T) {
+    println("part#$part solution: $computed")
+    check(computed == correct)
+}
+
 fun <T> Sequence<T>.split(predicate: (T) -> Boolean): Sequence<List<T>> = sequence {
     var list = mutableListOf<T>()
     forEach {

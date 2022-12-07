@@ -16,15 +16,13 @@ fun main() {
     val countPart1 = rangePairs.count { (firstRange, secondRange) ->
         firstRange in secondRange || secondRange in firstRange
     }
-    println(countPart1)
-    check(countPart1 == 464)
+    solution(1, countPart1, 464)
 
     // part 2:
     val countPart2 = rangePairs.count { (firstRange, secondRange) ->
         firstRange.overlaps(secondRange)
     }
-    println(countPart2)
-    check(countPart2 == 770)
+    solution(2, countPart2, 770)
 }
 
 private operator fun IntRange.contains(other: IntRange) = other.first in this && other.last in this

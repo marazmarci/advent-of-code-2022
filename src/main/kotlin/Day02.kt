@@ -28,8 +28,7 @@ fun main() {
         val outcome = myChoice.playRound(opponentsChoice)
         outcome to myChoice
     }.calculateScore()
-    println(part1Score)
-    check(part1Score == 8933)
+    solution(1, part1Score, 8933)
     // endregion Part 1
 
     // region Part 2
@@ -43,8 +42,7 @@ fun main() {
         val myChoice = getShapeChoiceToProduceOutcome(opponentsChoice, desiredOutcome)
         desiredOutcome to myChoice
     }.calculateScore()
-    println(part2Score)
-    check(part2Score == 11998)
+    solution(2, part2Score, 11998)
     // endregion Part 2
 
 
