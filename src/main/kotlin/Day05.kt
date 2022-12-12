@@ -12,22 +12,31 @@ fun main() {
     }
 
     val stacks = parseStacks(stacksLines)
-
     val moves = parseMoves(movesLines)
 
-    moves.forEach { (amount, from, to) ->
-        repeat(amount) {
-            val item = stacks[from].pop()
-            stacks[to].push(item)
+    fun List<Stack<Crate>>.clone() = map { stack ->
+        stack.fold(Stack<Crate>()) { newStacks, crate ->
+            newStacks.apply {
+                push(crate)
+            }
         }
     }
 
-    val topOfStacks = stacks.map {
+    fun List<Stack<Crate>>.getTopOfStacksAsString() = map {
         it.peek()
     }.joinToString("") {
         it.letter.toString()
     }
-    solution(1, topOfStacks, "TPGVQPFDH")
+
+    stacks.clone().also {
+        CrateMover9000.performMoves(it, moves)
+        solution(1, it.getTopOfStacksAsString(), "TPGVQPFDH")
+    }
+
+    stacks.clone().also {
+        CrateMover9001.performMoves(it, moves)
+        solution(2, it.getTopOfStacksAsString(), "DMRDFRHHH")
+    }
 }
 
 private fun parseMoves(movesLines: List<String>): List<Move> {
@@ -71,3 +80,36 @@ private fun parseStacks(stacksLines: List<String>): List<Stack<Crate>> {
 
 @JvmInline
 private value class Crate(val letter: Char)
+
+private sealed class CrateMover {
+    fun performMoves(stacks: List<Stack<Crate>>, moves: List<Move>) {
+        moves.forEach {
+            performMove(stacks, it)
+        }
+    }
+
+    protected abstract fun performMove(stacks: List<Stack<Crate>>, move: Move)
+}
+
+private object CrateMover9000 : CrateMover() {
+    override fun performMove(stacks: List<Stack<Crate>>, move: Move) {
+        repeat(move.amount) {
+            val item = stacks[move.from].pop()
+            stacks[move.to].push(item)
+        }
+    }
+}
+
+private object CrateMover9001 : CrateMover() {
+    override fun performMove(stacks: List<Stack<Crate>>, move: Move) {
+        val pickedUpCrates = buildList {
+            repeat(move.amount) {
+                val item = stacks[move.from].pop()
+                add(item)
+            }
+        }.reversed()
+        pickedUpCrates.forEach {
+            stacks[move.to].push(it)
+        }
+    }
+}
