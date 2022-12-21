@@ -4,10 +4,17 @@
 fun main() {
     val input = readInputFileLines(6).filter { it.isNotBlank() }.single()
 
-    val index = input.asSequence().windowed(4).withIndex().first { (_, list) ->
-        val distinctSize = list.distinct().size
-        distinctSize == 4
-    }.index + 4
+    val solution1 = input.findStartMarker(4)
+    solution(1, solution1, 1356)
 
-    solution(1, index, 1356)
+    val solution2 = input.findStartMarker(14)
+    solution(2, solution2, 2564)
 }
+
+private fun String.findStartMarker(size: Int) = asSequence()
+    .windowed(size)
+    .withIndex()
+    .first { (_, list) ->
+        val distinctSize = list.distinct().size
+        distinctSize == size
+    }.index + size
