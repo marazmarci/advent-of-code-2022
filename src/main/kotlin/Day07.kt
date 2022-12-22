@@ -66,6 +66,26 @@ fun main() {
             }
 
         solution(1, sumSizeOfDirectoriesWithSizeAtMost100k, 1555642)
+
+
+        val totalDiskSpace = 70_000_000
+        val targetFreeSpace = 30_000_000
+
+        val initialOccupiedSpace = root.size
+        val initialFreeSpace = totalDiskSpace - initialOccupiedSpace
+
+        val asd = root.bfsFlow(includeRoot = true)
+            .filterIsInstance<DirectoryNode>()
+            .map {
+                it.size
+            }
+            .filter {
+                initialFreeSpace + it >= targetFreeSpace
+            }
+            .toList()
+            .min()
+
+        solution(2, asd, 5974547)
     }
 }
 
