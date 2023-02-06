@@ -7,9 +7,11 @@ fun main() {
     val inputLines = readInputFileLines(9).filter { it.isNotBlank() }
 
     var head = Vec2(0, 0)
-    var tail = Vec2(0, 0)
+    val parts = Array(10 - 1) { Vec2(0, 0) }
 
-    val visited = mutableSetOf(tail)
+    fun tail() = parts.last()
+
+    val visited = mutableSetOf(tail())
 
     val headSteps = buildList {
         inputLines.forEach {
@@ -28,20 +30,25 @@ fun main() {
         }
     }
 
-    for (headStep in headSteps) {
+    headLoop@ for (headStep in headSteps) {
         head += headStep
 
-        if (tail.isTouching(head)) {
-            continue
+        var prevPart = head
+
+        for ((i, part) in parts.withIndex()) {
+            if (part.isTouching(prevPart)) {
+                continue@headLoop
+            }
+
+            val step = part.getStepTowards(prevPart)
+            parts[i] = part + step
+            prevPart = parts[i]
         }
 
-        val tailStep = tail.getStepTowardsHead(head)
-        tail += tailStep
-        visited.add(tail)
+        visited.add(tail())
     }
 
-    solution(1, visited.size, 0)
-
+    solution(2, visited.size, 0)
 }
 
 data class Vec2(
@@ -56,7 +63,7 @@ data class Vec2(
         x in (-1..1) && y in (-1..1)
     }
 
-    fun getStepTowardsHead(head: Vec2) = with(head - this) {
+    fun getStepTowards(to: Vec2) = with(to - this) {
         Vec2(x.sign, y.sign)
     }
 }
